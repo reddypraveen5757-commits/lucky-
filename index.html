@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Special Girl ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #200018, #720b45, #ff477e);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 390px;
+  padding: 25px;
+  text-align: center;
+  border: 1px solid #ffffff55;
+  border-radius: 25px;
+  background: #ffffff18;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 35px #ff8caf55;
+  z-index: 2;
+}
+
+h1 {
+  color: #ffb6d0;
+  margin-bottom: 12px;
+  font-size: 29px;
+}
+
+.subtitle {
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.photo {
+  width: 190px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 4px solid #ffc3d8;
+  box-shadow: 0 0 25px #ff8caf;
+  margin: 8px 0 18px;
+}
+
+.message {
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+h2 {
+  color: #ffd1e2;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#yes {
+  background: #ff4f91;
+  color: white;
+  box-shadow: 0 0 15px #ff4f91;
+}
+
+#yes:hover {
+  transform: scale(1.12);
+}
+
+#no {
+  background: white;
+  color: #a00050;
+}
+
+#result {
+  display: none;
+  margin-top: 22px;
+  line-height: 1.8;
+  color: #ffe0ec;
+  font-size: 19px;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  animation: floatUp linear forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+#musicNote {
+  font-size: 12px;
+  margin-top: 18px;
+  opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Hey, My Love ❤️</h1>
+
+  <p class="subtitle">
+    I made something special just for you 🥹💕
+  </p>
+
+  <!-- Put her photo in the same folder and name it lucky.jpg -->
+  <img src="lucky4.jpeg" alt="My special girl" class="photo"> 
+  <p class="message">
+    Ever since you came into my life,<br>
+    you made my world more beautiful. ✨<br><br>
+
+    Your smile makes my day,<br>
+    and your happiness means so much to me. 💗<br><br>
+
+    I don't promise to be perfect,<br>
+    but I promise to care for you,<br>
+    respect you, and make beautiful memories
+    with you. 🌹
+  </p>
+
+  <h2>Will You Be Mine? </h2>
+
+  <div class="buttons">
+    <button id="yes" onclick="sayYes()">YES ❤️</button>
+    <button id="no" onclick="sayNo()">NO 🙈</button>
+  </div>
+
+  <div id="result">
+    YAYYYY! 🥹❤️💖<br>
+    You just made my heart the happiest!<br>
+    Here's to our beautiful story together. 🌹
+  </div>
+
+  <p id="musicNote">Made with all my heart ❤️</p>
+</div>
+
+<script>
+function sayYes() {
+  document.getElementById("result").style.display = "block";
+  document.querySelector("h2").innerText =
+    "You Made Me The Happiest! 💖";
+
+  document.querySelector(".message").style.display = "none";
+  document.querySelector(".buttons").style.display = "none";
+
+  for (let i = 0; i < 45; i++) {
+    setTimeout(createHeart, i * 70);
+  }
+}
+
+function sayNo() {
+  const messages = [
+    "Are you sure? 🥺❤️",
+    "Give my heart one chance! 🌹",
+    "I'll respect your answer 💗"
+  ];
+
+  const noButton = document.getElementById("no");
+  const random = Math.floor(Math.random() * messages.length);
+
+  noButton.innerText = messages[random];
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+
+  const symbols = ["❤️", "💖", "💕", "💗", "🌹"];
+  heart.innerText = symbols[
+    Math.floor(Math.random() * symbols.length)
+  ];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (18 + Math.random() * 25) + "px";
+  heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
+}
+
+// Floating hearts in the background
+setInterval(createHeart, 450);
+</script>
+
+</body>
+</html>
