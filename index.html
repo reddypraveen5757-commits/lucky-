@@ -1,230 +1,399 @@
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Special Girl ❤️</title>
+<title>For Lucky ❤️</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  min-height:100vh;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:white;
+  background:radial-gradient(ellipse at top,#390927,#100510 65%,#030205);
+  overflow-x:hidden;
 }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-  background: linear-gradient(135deg, #200018, #720b45, #ff477e);
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  padding: 20px;
+#particles{
+  position:fixed;inset:0;overflow:hidden;
+  pointer-events:none;z-index:0;
 }
 
-.card {
-  width: 100%;
-  max-width: 390px;
-  padding: 25px;
-  text-align: center;
-  border: 1px solid #ffffff55;
-  border-radius: 25px;
-  background: #ffffff18;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 35px #ff8caf55;
-  z-index: 2;
+.particle{
+  position:absolute;bottom:-40px;
+  animation:rise linear forwards;
+  opacity:.8;
 }
 
-h1 {
-  color: #ffb6d0;
-  margin-bottom: 12px;
-  font-size: 29px;
+.app{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px 15px;
 }
 
-.subtitle {
-  margin-bottom: 18px;
-  line-height: 1.6;
+.card{
+  display:none;
+  width:100%;max-width:600px;
+  padding:30px 23px;text-align:center;
+  background:rgba(255,255,255,.055);
+  border:1px solid #ff547c66;border-radius:25px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 40px #ff174433;
+  animation:appear .8s ease;
 }
 
-.photo {
-  width: 190px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 20px;
-  border: 4px solid #ffc3d8;
-  box-shadow: 0 0 25px #ff8caf;
-  margin: 8px 0 18px;
+.card.active{display:block}
+
+.heart3d{
+  font-size:90px;
+  display:inline-block;
+  filter:drop-shadow(0 0 18px #ff1744);
+  animation:heartRotate 3s ease-in-out infinite;
 }
 
-.message {
-  line-height: 1.8;
-  margin-bottom: 20px;
-  font-size: 15px;
+h1{
+  color:#ff85aa;
+  font-size:clamp(27px,6vw,40px);
+  margin:15px 0;
 }
 
-h2 {
-  color: #ffd1e2;
-  margin-bottom: 20px;
-  font-size: 22px;
+h2{color:#ff9dbb;margin:15px 0}
+
+p{
+  color:#f9e0ea;
+  line-height:1.85;
+  margin:14px 0;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+.highlight{color:#ff9fbe;font-weight:bold}
+
+button{
+  padding:14px 23px;
+  border:0;border-radius:30px;
+  background:linear-gradient(120deg,#ff1744,#a000ff);
+  color:white;font-size:16px;font-weight:bold;
+  cursor:pointer;margin:8px;
+  box-shadow:0 0 20px #ff174444;
+  transition:transform .25s;
 }
 
-button {
-  padding: 12px 25px;
-  border: none;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+button:hover{transform:scale(1.05)}
+
+input{
+  width:100%;max-width:300px;
+  display:block;margin:23px auto 12px;
+  padding:15px;
+  border:1px solid #ff759c;
+  border-radius:12px;
+  background:#ffffff0c;color:white;
+  outline:none;text-align:center;
+  font-size:22px;letter-spacing:12px;
 }
 
-#yes {
-  background: #ff4f91;
-  color: white;
-  box-shadow: 0 0 15px #ff4f91;
+input::placeholder{
+  font-size:14px;letter-spacing:0;color:#dcb3c6;
 }
 
-#yes:hover {
-  transform: scale(1.12);
+.photo{
+  display:block;width:220px;height:260px;
+  max-width:100%;object-fit:cover;
+  margin:20px auto;
+  border:3px solid #ff85aa;border-radius:22px;
+  box-shadow:0 0 25px #ff174477;
 }
 
-#no {
-  background: white;
-  color: #a00050;
+#feedback{min-height:25px;color:#ff9fbe}
+
+#celebration{
+  display:none;
+  position:fixed;inset:0;
+  z-index:5;pointer-events:none;
+  align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;
+  background:#14020bdc;
+  padding:20px;
 }
 
-#result {
-  display: none;
-  margin-top: 22px;
-  line-height: 1.8;
-  color: #ffe0ec;
-  font-size: 19px;
+#celebration h1{font-size:clamp(32px,8vw,55px)}
+
+.small{font-size:13px;color:#d9b9c8}
+
+@keyframes heartRotate{
+  0%,100%{transform:perspective(400px) rotateY(-18deg) scale(1)}
+  50%{transform:perspective(400px) rotateY(18deg) scale(1.13)}
 }
 
-.heart {
-  position: fixed;
-  bottom: -30px;
-  animation: floatUp linear forwards;
-  pointer-events: none;
-  z-index: 1;
+@keyframes appear{
+  from{opacity:0;transform:translateY(20px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
 
-@keyframes floatUp {
-  from {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-110vh) rotate(360deg);
-    opacity: 0;
-  }
+@keyframes rise{
+  to{transform:translateY(-115vh) rotate(360deg);opacity:0}
 }
 
-#musicNote {
-  font-size: 12px;
-  margin-top: 18px;
-  opacity: 0.8;
+@media(max-width:450px){
+  .card{padding:26px 18px}
+  .heart3d{font-size:75px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>Hey, My Love ❤️</h1>
+<div id="particles"></div>
 
-  <p class="subtitle">
-    I made something special just for you 🥹💕
+<main class="app">
+
+  <!-- PAGE 1: INTRODUCTION -->
+  <section class="card active" id="intro">
+    <div class="heart3d">❤️</div>
+    <h1>For My Lucky 🌹</h1>
+    <p><i>A little universe made just for you...</i></p>
+
+    <h2>Hey, Lucky ❤️</h2>
+
+    <p>
+      I don't know if words will ever be enough to explain
+      how much you mean to me, but I want to try.
+    </p>
+
+    <p>
+      Whenever I think about you, even an ordinary moment
+      feels a little more beautiful. Your smile, your presence,
+      and the little things that make you who you are have a
+      special place in my heart. 🥹
+    </p>
+
+    <p>
+      Maybe I don't always express my feelings perfectly,
+      but one thing is true: <span class="highlight">
+      you mean more to me than you could ever imagine.</span>
+    </p>
+
+    <p>
+      I care about your happiness. I want to make beautiful
+      memories with you, support you, and give you reasons
+      to smile. 💗
+    </p>
+
+    <p>
+      I made this little experience just for you.
+      Every page holds a little more of what I want to tell you. 💌
+    </p>
+
+    <p><b class="highlight">With love, Praveen ❤️</b></p>
+
+    <button onclick="showPage('lock')">
+      Enter My Universe ❤️
+    </button>
+  </section>
+
+
+  <!-- PAGE 2: SECRET PIN LOCK -->
+  <section class="card" id="lock">
+    <div class="heart3d" id="lockIcon">🔒</div>
+    <h1>A Little Secret for Lucky</h1>
+
+    <p>
+      My heart has a little secret waiting for you.<br>
+      Enter your secret PIN to discover it. 💌
+    </p>
+
+    <form id="pinForm">
+      <input
+        id="pin"
+        type="password"
+        inputmode="numeric"
+        pattern="[0-9]{4}"
+        maxlength="4"
+        placeholder="Enter secret PIN"
+        autocomplete="off"
+        aria-label="Secret four-digit PIN"
+        required
+      >
+
+      <button type="submit">Unlock My Heart ❤️</button>
+    </form>
+
+    <p id="feedback" aria-live="polite"></p>
+    <p class="small">A little surprise is waiting beyond this lock. ✨</p>
+  </section>
+
+
+  <!-- PAGE 3: LOVE STORY -->
+  <section class="card" id="story">
+    <div class="heart3d">💖</div>
+    <h1>My Beautiful Lucky</h1>
+    <p>Someone special deserves a special place in my universe. ✨</p>
+
+    <img
+      class="photo"
+      src="lucky2.jpeg"
+      alt="Lucky"
+      onerror="this.style.display='none';document.getElementById('photoHelp').style.display='block';"
+    >
+
+    <p id="photoHelp" class="small" style="display:none">
+      Add Lucky's photo to the same folder and name it lucky2.jpeg.
+    </p>
+
+    <p>
+      Lucky, whenever I think about you, I find reasons to smile.
+      There's something about you that makes ordinary moments
+      feel special. ❤️
+    </p>
+
+    <p>
+      I want to know you better, make beautiful memories with you,
+      and be someone who brings happiness into your life.
+    </p>
+
+    <p>There's one question I've wanted to ask you... 🌹</p>
+
+    <button onclick="showPage('proposal')">
+      My Final Question 💌
+    </button>
+  </section>
+
+
+  <!-- PAGE 4: PROPOSAL -->
+  <section class="card" id="proposal">
+    <div class="heart3d">❤️</div>
+    <h1>Lucky, Will You Be Mine? 💍</h1>
+
+    <p>
+      You have a special place in my heart. I don't know what
+      the future holds, but I'd love the chance to make beautiful
+      memories with you. 🌹
+    </p>
+
+    <p>
+      I promise to respect your feelings, care about your happiness,
+      and always be honest with you.
+    </p>
+
+    <h2>Will you give us a chance? ❤️</h2>
+
+    <div id="proposalButtons">
+      <button onclick="sayYes()">YES ❤️</button>
+      <button onclick="sayNo()" style="background:#fff;color:#861447">
+        Not sure 🙈
+      </button>
+    </div>
+
+    <div id="result" style="display:none">
+      <h2 id="resultTitle"></h2>
+      <p id="resultMessage"></p>
+    </div>
+
+    <p class="small">Made with love, especially for Lucky. 💗</p>
+  </section>
+
+</main>
+
+
+<!-- YES CELEBRATION -->
+<div id="celebration">
+  <div class="heart3d">💖</div>
+  <h1>Thank You, Lucky! ❤️</h1>
+  <p>
+    You've made this moment so special. 🥹<br>
+    With love, Praveen 🌹
   </p>
-
-  <!-- Put her photo in the same folder and name it lucky.jpg -->
-  <img src="lucky4.jpeg" alt="My special girl" class="photo"> 
-  <p class="message">
-    Ever since you came into my life,<br>
-    you made my world more beautiful. ✨<br><br>
-
-    Your smile makes my day,<br>
-    and your happiness means so much to me. 💗<br><br>
-
-    I don't promise to be perfect,<br>
-    but I promise to care for you,<br>
-    respect you, and make beautiful memories
-    with you. 🌹
-  </p>
-
-  <h2>Will You Be Mine? </h2>
-
-  <div class="buttons">
-    <button id="yes" onclick="sayYes()">YES ❤️</button>
-    <button id="no" onclick="sayNo()">NO 🙈</button>
-  </div>
-
-  <div id="result">
-    YAYYYY! 🥹❤️💖<br>
-    You just made my heart the happiest!<br>
-    Here's to our beautiful story together. 🌹
-  </div>
-
-  <p id="musicNote">Made with all my heart ❤️</p>
 </div>
 
+
 <script>
+const SECRET_PIN = "2576";
+let unlocked = false;
+
+function showPage(pageId) {
+  if ((pageId === "story" || pageId === "proposal") && !unlocked) {
+    pageId = "lock";
+  }
+
+  document.querySelectorAll(".card").forEach(card => {
+    card.classList.remove("active");
+  });
+
+  const page = document.getElementById(pageId);
+  page.classList.add("active");
+
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+document.getElementById("pinForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const pin = document.getElementById("pin");
+  const feedback = document.getElementById("feedback");
+
+  if (pin.value === SECRET_PIN) {
+    unlocked = true;
+    document.getElementById("lockIcon").textContent = "🔓";
+    feedback.textContent = "The heart is opening, Lucky! ❤️";
+
+    setTimeout(() => {
+      pin.value = "";
+      showPage("story");
+    }, 1000);
+
+  } else {
+    feedback.textContent = "That isn't the right key. Try again, Lucky. 💗";
+    pin.value = "";
+    pin.focus();
+  }
+});
+
 function sayYes() {
+  document.getElementById("proposalButtons").style.display = "none";
   document.getElementById("result").style.display = "block";
-  document.querySelector("h2").innerText =
-    "You Made Me The Happiest! 💖";
+  document.getElementById("resultTitle").textContent = "A Beautiful Moment ❤️";
+  document.getElementById("resultMessage").innerHTML =
+    "Lucky, thank you for sharing this moment with me. 🥹💖<br><br>" +
+    "You mean so much to me.<br><br>With love, Praveen 🌹";
 
-  document.querySelector(".message").style.display = "none";
-  document.querySelector(".buttons").style.display = "none";
+  document.getElementById("celebration").style.display = "flex";
 
-  for (let i = 0; i < 45; i++) {
-    setTimeout(createHeart, i * 70);
+  setTimeout(() => {
+    document.getElementById("celebration").style.display = "none";
+  }, 3500);
+
+  for (let i = 0; i < 60; i++) {
+    setTimeout(createParticle, i * 65);
   }
 }
 
 function sayNo() {
-  const messages = [
-    "Are you sure? 🥺❤️",
-    "Give my heart one chance! 🌹",
-    "I'll respect your answer 💗"
-  ];
-
-  const noButton = document.getElementById("no");
-  const random = Math.floor(Math.random() * messages.length);
-
-  noButton.innerText = messages[random];
+  document.getElementById("proposalButtons").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("resultTitle").textContent = "It's Okay, Lucky ❤️";
+  document.getElementById("resultMessage").textContent =
+    "Your feelings matter to me, and I'll respect your answer. " +
+    "Thank you for reading my little love story. 🌷";
 }
 
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-
-  const symbols = ["❤️", "💖", "💕", "💗", "🌹"];
-  heart.innerText = symbols[
-    Math.floor(Math.random() * symbols.length)
+function createParticle() {
+  const particle = document.createElement("div");
+  particle.className = "particle";
+  particle.textContent = ["❤️", "💗", "💕", "✨", "🌹"][
+    Math.floor(Math.random() * 5)
   ];
 
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (18 + Math.random() * 25) + "px";
-  heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+  particle.style.left = Math.random() * 100 + "vw";
+  particle.style.fontSize = 16 + Math.random() * 25 + "px";
+  particle.style.animationDuration = 3 + Math.random() * 4 + "s";
 
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 7000);
+  document.getElementById("particles").appendChild(particle);
+  setTimeout(() => particle.remove(), 7500);
 }
 
-// Floating hearts in the background
-setInterval(createHeart, 450);
+setInterval(createParticle, 400);
 </script>
 
 </body>
